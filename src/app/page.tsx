@@ -1,3 +1,11 @@
+import { CardsSection } from "@/components/cards-section";
+import { HeroSection } from "@/components/hero-section";
+
 export default function Home() {
-	return <h1>hello</h1>;
+  return (
+    <>
+      <HeroSection />
+      <CardsSection />
+    </>
+  );
 }
