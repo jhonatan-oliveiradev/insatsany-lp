@@ -1,11 +1,64 @@
+"use client";
+
 import Image from "next/image";
 import { GridContainer } from "./ui/grid-container";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 export function HeroSection() {
+  const textHeroRef = useRef(null);
+  const mockupLeftRef = useRef(null);
+  const mockupRightRef = useRef(null);
+
+  useEffect(() => {
+    const textHero = textHeroRef.current;
+    const mLeft = mockupLeftRef.current;
+    const mRight = mockupRightRef.current;
+
+    gsap.fromTo(
+      textHero,
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power4.out",
+      },
+    );
+
+    gsap.fromTo(
+      mLeft,
+      {
+        rotate: 0,
+      },
+      {
+        rotate: -10,
+        duration: 1,
+      },
+    );
+
+    gsap.fromTo(
+      mRight,
+      {
+        rotate: 0,
+      },
+      {
+        rotate: 10,
+        duration: 1,
+      },
+    );
+  }, []);
+
   return (
     <section className="bg-hero relative h-[874px] w-full overflow-hidden bg-teal-900 bg-top bg-no-repeat pt-16">
       <GridContainer className="flex flex-col items-center">
-        <div className="w-full max-w-[1056px] text-center">
+        <div
+          className="w-full max-w-[1056px] text-center opacity-0"
+          ref={textHeroRef}
+        >
           <h3 className="mb-4 text-xl font-medium text-teal-600">
             Novo curso focado em Instagram
           </h3>
@@ -53,18 +106,18 @@ export function HeroSection() {
           <Image
             src="/mockup.svg"
             alt="Imagem: silhueta de um celular"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="relative left-[53px] top-[18px] h-auto w-[328.376px] -rotate-12"
+            width={328}
+            height={662}
+            className="relative left-[53px] top-[18px]"
+            ref={mockupLeftRef}
           />
           <Image
             src="/mockup.svg"
             alt="Imagem: silhueta de um celular"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="relative right-[53px] top-[18px] h-auto w-[328.376px] rotate-12"
+            width={328}
+            height={662}
+            className="relative right-[53px] top-[18px]"
+            ref={mockupRightRef}
           />
         </div>
       </GridContainer>
